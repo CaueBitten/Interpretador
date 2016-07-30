@@ -5,9 +5,8 @@ public class Sistema {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LeitorArquivos leitor = new LeitorArquivos();
-		Memoria memoria = new Memoria();
-		memoria.imprimirMemoria();
-		
+		new Memoria(4096);
+		Memoria.imprimirMemoria();		
 	}
 
 }
