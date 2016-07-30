@@ -1,40 +1,54 @@
-	package model;
+package model;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class Memoria {
+public final class Memoria {
 	
-	private static int tamanho;
-	private static List<Dado> memoria = new ArrayList<Dado>(100);
-	private static Dado ponteiro = new Dado(0, "null");
+	private static int tamanho = 4096;
+	private static Memoria INSTANCE;
+	private static List<Dado> dados = new ArrayList<Dado>(Memoria.tamanho);
+	//private static Dado ponteiro = new Dado(0, "null");
 	
-	public Memoria(){
-		inicializarMemoria(100);
+	public Memoria(int tamanho){
+		inicializarMemoria(Memoria.tamanho);
 	}
 	
-	private void inicializarMemoria(int tamanho){
-		this.tamanho = tamanho;
-		for(Dado dado : memoria){
-			dado.setPosicao(this.tamanho - tamanho);
-			tamanho--;
+	private static void inicializarMemoria(int tamanho){
+		Memoria.setTamanho(tamanho);
+
+		for(int i = 0; i < Memoria.tamanho; i++){
+			Memoria.dados.add(new Dado(i, "null"));
 		}
 	}
 	
-	public List<Dado> getMemoria(){
-		return memoria;
+	public static Memoria getInstance(){
+		if(INSTANCE == null){
+			INSTANCE = new Memoria(getTamanho());
+		}
+		return INSTANCE;
 	}
 	
-	public void imprimirMemoria(){
-		for(int i = 0; i < memoria.size(); i++){
-			System.out.println("#" + memoria.get(i).getPosicao() + " -> " + memoria.get(i).getConteudo() + " ");
+	public static List<Dado> getMemoria(){
+		return dados;
+	}
+	
+	public static int getTamanho() {
+		return tamanho;
+	}
+
+	public static void setTamanho(int tamanho) {
+		Memoria.tamanho = tamanho;
+	}
+
+	public static void imprimirMemoria(){
+		for(int i = 0; i < Memoria.dados.size(); i++){
+			System.out.println("#" + Memoria.dados.get(i).getPosicao() + " -> " + Memoria.dados.get(i).getConteudo() + " ");
 		}
 	}
 	
-	public void liberarMemoria(){
-		memoria.clear();
-		ponteiro.apagarDado();
-		ponteiro.setPosicao(0);
+	public static void liberarMemoria(){
+		dados.clear();
 	}
 	
 }
