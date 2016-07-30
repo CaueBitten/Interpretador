@@ -1,0 +1,40 @@
+	package model;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Memoria {
+	
+	private static int tamanho;
+	private static List<Dado> memoria = new ArrayList<Dado>(100);
+	private static Dado ponteiro = new Dado(0, "null");
+	
+	public Memoria(){
+		inicializarMemoria(100);
+	}
+	
+	private void inicializarMemoria(int tamanho){
+		this.tamanho = tamanho;
+		for(Dado dado : memoria){
+			dado.setPosicao(this.tamanho - tamanho);
+			tamanho--;
+		}
+	}
+	
+	public List<Dado> getMemoria(){
+		return memoria;
+	}
+	
+	public void imprimirMemoria(){
+		for(int i = 0; i < memoria.size(); i++){
+			System.out.println("#" + memoria.get(i).getPosicao() + " -> " + memoria.get(i).getConteudo() + " ");
+		}
+	}
+	
+	public void liberarMemoria(){
+		memoria.clear();
+		ponteiro.apagarDado();
+		ponteiro.setPosicao(0);
+	}
+	
+}
