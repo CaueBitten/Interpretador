@@ -4,8 +4,9 @@ public class Sistema {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LeitorArquivos leitor = new LeitorArquivos();
 		new Memoria(4096);
+		GerenciadorArquivos leitor = new GerenciadorArquivos();
+		leitor.lerArquivo("Programa.txt");
 		Memoria.imprimirMemoria();		
 	}
 
