@@ -6,24 +6,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class LeitorArquivos {
+public class GerenciadorArquivos {
 	
 	private BufferedReader bufferedReader;
-	private StringBuilder buffer;
+	private String buffer;
 	
-	public LeitorArquivos(){
-		
+	public GerenciadorArquivos(){
+		buffer = new String();
 	}
 	
 	public void lerArquivo(String arquivo){
 		try {
 			InputStream inputStream = new FileInputStream(arquivo);
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			bufferedReader = new BufferedReader(inputStreamReader);
+			bufferedReader = new BufferedReader(inputStreamReader);			
 			
-			do{
-				buffer.append(bufferedReader.readLine());
-			}while(bufferedReader.readLine() != null);
+			buffer = bufferedReader.readLine();
+			for(int i = 0; buffer != null; i++){
+				Memoria.getMemoria().get(i).setConteudo(buffer);				
+				buffer = bufferedReader.readLine();
+			}
+		
 			
 		}
 		catch(IOException e){
@@ -37,6 +40,10 @@ public class LeitorArquivos {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public String getBuffer(){
+		return buffer;
 	}
 	
 }
