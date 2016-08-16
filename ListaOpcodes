@@ -1,0 +1,32 @@
+package model;
+
+import java.util.ArrayList;
+
+public class ListaOpcodes {
+  
+    private ArrayList<String> opcodes;
+
+    public ListaOpcodes() {
+        
+        opcodes = new ArrayList<String>();
+        
+        opcodes.add("ADD");
+        opcodes.add("SUB");
+        opcodes.add("MUL");
+        opcodes.add("DIV");
+        opcodes.add("MOD");
+        opcodes.add("IGL");
+        opcodes.add("SIN");
+        opcodes.add("COS");        
+    }
+    
+    public String InListaOpcodes(String op){
+    	    	
+        for (int i = 0; i < opcodes.size(); i++) {
+            if(op.equals(opcodes.get(i))){
+            	return opcodes.get(i);            	
+            }
+        }
+      	return "HALT";
+    }
+}
