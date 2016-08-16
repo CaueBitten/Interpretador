@@ -2,20 +2,20 @@ package model;
 
 public class Dado {
 	
-	private int posicao;
+	private int endereco;
 	private String conteudo;
 	
 	public Dado(int posicao, String conteudo){
-		this.posicao = posicao;
+		this.endereco = posicao;
 		this.conteudo = conteudo;
 	}
-
-	public int getPosicao() {
-		return posicao;
+	
+	public int getEndereco() {
+		return endereco;
 	}
 
-	public void setPosicao(int posicao) {
-		this.posicao = posicao;
+	public void setEndereco(int endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getConteudo() {
