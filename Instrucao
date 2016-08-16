@@ -1,0 +1,95 @@
+package model;
+
+public class Instrucao {
+
+	private ListaOpcodes listaOpcodes = new ListaOpcodes();
+	
+	private double arg1;
+	private double arg2;
+	private double resultado;
+	
+	private String opcode;
+	
+	public Instrucao(String instrucao){
+		opcode = new String();
+		decodifica(instrucao);
+	}
+	
+	public double getResultado(){
+		return this.resultado;
+	}
+	
+	public void decodifica(String instrucao){
+		
+		
+	    opcode += instrucao.substring(0, 3);
+			    
+	    boolean isVirgula = false;
+	    for(int i = 3; i < instrucao.length(); i++){  		
+	 
+	    	if(Character.isDigit(instrucao.charAt(i))){ 
+            	if(!isVirgula){
+            		this.arg1 = Character.getNumericValue(instrucao.charAt(i));                             
+            	}
+	            else{
+	              	this.arg2 = Character.getNumericValue(instrucao.charAt(i));
+	            } 
+	        }
+	    	
+	    	else{
+	    		if(instrucao.charAt(i) == ','){
+	    			isVirgula = true;
+	    		}
+	    	}
+	    }	    
+
+}
+	
+	public boolean executa(){
+		
+		if(listaOpcodes.InListaOpcodes(opcode).equals("HALT")){
+			return false;
+		}
+		
+		switch(opcode){
+			case "ADD":
+				this.resultado = this.arg1 + this.arg2;
+				break;
+				
+			case "SUB":
+       			this.resultado = this.arg1 - this.arg2;
+       			break;
+       			
+			case "MUL":
+       			this.resultado = this.arg1 * this.arg2;
+       			break;
+       			
+			case "DIV":
+       			if(this.arg2 != 0){
+       				this.resultado = this.arg1 / this.arg2;
+       			}
+       			return false;
+       			
+			case "MOD":
+       			if(this.arg2 !=0){
+       				this.resultado = this.arg1 % this.arg2;
+       			}
+       			return false;
+       					
+			case "SIN":
+       			this.resultado = Math.sin(this.arg1);
+       			break;
+       			
+			case "COS":
+       			this.resultado = Math.cos(this.arg1);
+       			break;
+       			
+			case "HALT":
+				return false;
+		}
+		
+		return true;
+	}
+	
+	
+}
