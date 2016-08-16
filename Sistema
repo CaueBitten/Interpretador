@@ -4,10 +4,10 @@ public class Sistema {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Processador();
+		new Interpretador();
 		GerenciadorArquivos leitor = new GerenciadorArquivos();
 		leitor.lerArquivo("Programa.txt");
-		Memoria.imprimirMemoria();		
+		Interpretador.interpretar();	
 	}
 
 }
