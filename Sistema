@@ -4,7 +4,7 @@ public class Sistema {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Memoria(4096);
+		new Processador();
 		GerenciadorArquivos leitor = new GerenciadorArquivos();
 		leitor.lerArquivo("Programa.txt");
 		Memoria.imprimirMemoria();		
