@@ -1,3 +1,7 @@
+/*
+ * Classe que realiza o interpretador
+ * Padrões utilizados: Singleton
+ */
 package model;
 
 public final class Interpretador {
@@ -7,6 +11,7 @@ public final class Interpretador {
 	private static Memoria memoria; 
 	
 	private static boolean runBit = true;
+	
 	
 	public static Interpretador getInstance(){
 		if(INSTANCE == null){
@@ -25,16 +30,29 @@ public final class Interpretador {
 	}
 	
 	 public static void interpretar(){
-		int enderecoInicial = 0;
+		int enderecoInicial = 0;										
 		int enderecoAtual = enderecoInicial;
 		
 		while(runBit){
-			Memoria.getMemoria(enderecoAtual);
-			Memoria.imprimirMemoria(enderecoAtual);
+			Dado dadoAtual = Memoria.getMemoria(enderecoAtual);		
 			enderecoAtual += 1;
-			if(Memoria.getMemoria(enderecoAtual).getConteudo() == "null"){
+			
+			Instrucao instrucao = new Instrucao(dadoAtual.getConteudo());
+			
+			if(instrucao.executa()){
+				System.out.println(instrucao.getResultado());
+			}
+			else{
+				runBit = false;
+				System.out.println("Erro na linha " + enderecoAtual + "! Interpretador foi forçado a parar.");
+			}
+			
+			
+			//Fim do programa carregado na memória
+			if(dadoAtual.getConteudo() == "null"){
 				runBit = false;
 			}
+			
 		}
 	} 
 }
