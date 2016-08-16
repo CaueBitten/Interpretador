@@ -5,17 +5,16 @@
 	
 	public final class Memoria {
 		
-		private static int tamanho = 4096;
+		private static int tamanho = 100;
 		private static Memoria INSTANCE;
 		private static List<Dado> dados = new ArrayList<Dado>(Memoria.tamanho);
 		private static int ponteiro = 0;
 		
-		public Memoria(int tamanho){
-			inicializarMemoria(Memoria.tamanho);
+		public Memoria(){
+			inicializarMemoria();
 		}
 		
-		private static void inicializarMemoria(int tamanho){
-			Memoria.setTamanho(tamanho);
+		private static void inicializarMemoria(){
 	
 			for(int i = 0; i < Memoria.tamanho; i++){
 				Memoria.dados.add(new Dado(i, "null"));
@@ -24,7 +23,7 @@
 		
 		public static Memoria getInstance(){
 			if(INSTANCE == null){
-				INSTANCE = new Memoria(getTamanho());
+				INSTANCE = new Memoria();
 			}
 			return INSTANCE;
 		}
@@ -41,14 +40,15 @@
 			return tamanho;
 		}
 	
-		public static void setTamanho(int tamanho) {
-			Memoria.tamanho = tamanho;
-		}
 	
 		public static void imprimirMemoria(){
 			for(int i = 0; i < Memoria.dados.size(); i++){
-				System.out.println("#" + Memoria.dados.get(i).getEndereco() + " -> " + Memoria.dados.get(i).getConteudo() + " ");
+				imprimirMemoria(i);
 			}
+		}
+		
+		public static void imprimirMemoria(int endereco){		
+			System.out.println("#" + Memoria.dados.get(endereco).getEndereco() + " -> " + Memoria.dados.get(endereco).getConteudo() + " ");
 		}
 		
 		public static void liberarMemoria(){
