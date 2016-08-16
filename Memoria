@@ -1,67 +1,68 @@
-	package model;
-	
-	import java.util.List;
-	import java.util.ArrayList;
-	
-	public final class Memoria {
-		
-		private static int tamanho = 100;
-		private static Memoria INSTANCE;
-		private static List<Dado> dados = new ArrayList<Dado>(Memoria.tamanho);
-		private static int ponteiro = 0;
-		
-		public Memoria(){
-			inicializarMemoria();
-		}
-		
-		private static void inicializarMemoria(){
-	
-			for(int i = 0; i < Memoria.tamanho; i++){
-				Memoria.dados.add(new Dado(i, "null"));
-			}
-		}
-		
-		public static Memoria getInstance(){
-			if(INSTANCE == null){
-				INSTANCE = new Memoria();
-			}
-			return INSTANCE;
-		}
-		
-		public static List<Dado> getMemoria(){
-			return dados;
-		}
-		
-		public static Dado getMemoria(int endereco){
-			return dados.get(endereco);
-		}
-		
-		public static int getTamanho() {
-			return tamanho;
-		}
-	
-	
-		public static void imprimirMemoria(){
-			for(int i = 0; i < Memoria.dados.size(); i++){
-				imprimirMemoria(i);
-			}
-		}
-		
-		public static void imprimirMemoria(int endereco){		
-			System.out.println("#" + Memoria.dados.get(endereco).getEndereco() + " -> " + Memoria.dados.get(endereco).getConteudo() + " ");
-		}
-		
-		public static void liberarMemoria(){
-			dados.clear();
-			setPonteiro(0);
-		}
+/*
+ * Classe que simula a memória do computador
+ * Padrões utilizados: Singleton
+ */
 
-		public static int getPonteiro() {
-			return ponteiro;
-		}
+package model;
 
-		public static void setPonteiro(int ponteiro) {
-			Memoria.ponteiro = ponteiro;
-		}
-		
+import java.util.List;
+import java.util.ArrayList;
+
+public final class Memoria {
+	
+	private static int tamanho = 100;
+	private static Memoria INSTANCE;
+	private static List<Dado> dados = new ArrayList<Dado>(Memoria.tamanho);
+	private static int ponteiro = 0;
+	
+	public Memoria(){
+		inicializarMemoria();
 	}
+	
+	private static void inicializarMemoria(){
+
+		for(int i = 0; i < Memoria.tamanho; i++){
+			Memoria.dados.add(new Dado(i, "null"));
+		}
+	}
+
+	public static Memoria getInstance(){
+		if(INSTANCE == null){
+			INSTANCE = new Memoria();
+		}
+		return INSTANCE;
+	}
+	
+	public static List<Dado> getMemoria(){
+		return dados;
+	}
+	
+	public static Dado getMemoria(int endereco){
+		return dados.get(endereco);
+	}
+	
+	public static int getTamanho() {
+		return tamanho;
+	}
+	
+	
+	public static void imprimirMemoria(){
+		for(int i = 0; i < Memoria.dados.size(); i++){
+			Memoria.getMemoria().get(i).imprimirDado();
+		}
+	}
+	
+	public static void liberarMemoria(){
+		dados.clear();
+		setPonteiro(0);
+	}
+
+	public static int getPonteiro() {
+		return ponteiro;
+	}
+
+	public static void setPonteiro(int ponteiro) {
+		Memoria.ponteiro = ponteiro;
+	}
+		
+}
