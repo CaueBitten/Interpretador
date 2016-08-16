@@ -1,3 +1,7 @@
+/*
+ * Classe que gerencia os arquivos.
+ */
+
 package model;
 
 import java.io.BufferedReader;
