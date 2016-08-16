@@ -33,6 +33,10 @@
 			return dados;
 		}
 		
+		public static Dado getMemoria(int endereco){
+			return dados.get(endereco);
+		}
+		
 		public static int getTamanho() {
 			return tamanho;
 		}
@@ -43,7 +47,7 @@
 	
 		public static void imprimirMemoria(){
 			for(int i = 0; i < Memoria.dados.size(); i++){
-				System.out.println("#" + Memoria.dados.get(i).getPosicao() + " -> " + Memoria.dados.get(i).getConteudo() + " ");
+				System.out.println("#" + Memoria.dados.get(i).getEndereco() + " -> " + Memoria.dados.get(i).getConteudo() + " ");
 			}
 		}
 		
