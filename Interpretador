@@ -1,0 +1,40 @@
+package model;
+
+public final class Interpretador {
+	
+	private static Interpretador INSTANCE;
+	
+	private static Memoria memoria; 
+	
+	private static boolean runBit = true;
+	
+	public static Interpretador getInstance(){
+		if(INSTANCE == null){
+			INSTANCE = new Interpretador();
+		}
+		return INSTANCE;
+	}
+	
+	public Interpretador(){
+		inicializarInterpretador();
+	}
+	
+	private static void inicializarInterpretador(){
+		new Memoria();
+		
+	}
+	
+	 public static void interpretar(){
+		int enderecoInicial = 0;
+		int enderecoAtual = enderecoInicial;
+		
+		while(runBit){
+			Memoria.getMemoria(enderecoAtual);
+			Memoria.imprimirMemoria(enderecoAtual);
+			enderecoAtual += 1;
+			if(Memoria.getMemoria(enderecoAtual).getConteudo() == "null"){
+				runBit = false;
+			}
+		}
+	} 
+}
